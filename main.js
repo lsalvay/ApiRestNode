@@ -29,7 +29,7 @@ app.put('/api/product/:productId', (req, res) =>{
 })
 
 app.delete('/api/product/:productId', (req, res) =>{
-
+	//comentario desde local
 })
 
 mongoose.connection('mongodb')
