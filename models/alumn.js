@@ -9,3 +9,4 @@ const AlumnSchema = Schema({
 	email: String,
 	phone: String
 })
+module.exports = mongoose.model('Alumn', AlumnSchema)
