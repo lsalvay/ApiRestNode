@@ -16,7 +16,7 @@ app.get('/api/products', (req, res) =>{
 })
 
 app.get('/api/product/:productId', (req, res) =>{
-
+//comentario desde remoto
 })	
 
 app.post('/api/product', (req, res) =>{
