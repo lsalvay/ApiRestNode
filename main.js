@@ -4,6 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
+const Alumn = require('./models/alumn')
+
 const app = express()
 const port = process.env.Port || 3000
 
@@ -19,9 +21,20 @@ app.get('/api/product/:productId', (req, res) =>{
 
 })	
 
-app.post('/api/product', (req, res) =>{
+app.post('/api/alumn', (req, res) =>{
+	console.log('POST /api/alumn')
 	console.log(req.body)
-	res.status(200).send({message: 'El producto se ha recibido'})
+	let alumn = new Alumn()
+	alumn.name = req.body.name
+	alumn.lastName = req.body.lastName
+	alumn.email = req.body.email
+	alumn.phone = req.body.phone
+
+	alumn.save((err, alumnStored) =>{
+		if(err) res.status(500).send({message: 'Error al salvar en la base de datos' })
+
+		res.status(200).send({alumn: alumnStored})	
+	})
 })
 
 app.put('/api/product/:productId', (req, res) =>{
