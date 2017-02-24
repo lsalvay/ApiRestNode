@@ -16,7 +16,6 @@ app.get('/api/products', (req, res) =>{
 })
 
 app.get('/api/product/:productId', (req, res) =>{
-//comentario modificado remoto
 
 })	
 
@@ -30,11 +29,17 @@ app.put('/api/product/:productId', (req, res) =>{
 })
 
 app.delete('/api/product/:productId', (req, res) =>{
-	//comentario desde local
+
 })
 
-mongoose.connection('mongodb')
-
-app.listen(port, () => {
-	console.log(`API REST Corriendo en http://localhost:${port}`)
+mongoose.connect('mongodb://localhost:27017/shop', (err, res) => {
+	if(err){
+		return console.log(`Error al conectar a la base de datos: ${err}`)
+	}
+		console.log('Conexion establecida')
+		app.listen(port, () => {
+		console.log(`API REST Corriendo en http://localhost:${port}`)
+		})
 })
+
+
