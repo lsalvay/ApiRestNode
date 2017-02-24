@@ -12,13 +12,25 @@ const port = process.env.Port || 3000
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-app.get('/api/products', (req, res) =>{
-	res.send(200, {products: []})
+app.get('/api/alumns', (req, res) =>{
+	Alumn.find({}, (err, alumns) => {
+		if(err) return res.status(500).send({message: `Error al realizar conexión: ${err}` })
+		if(!alumns) return res.status(404).send({message: 'Ruta no encontrada'})	
+		
+		res.status(200).send({alumns})
+	})	
 	
 })
 
-app.get('/api/product/:productId', (req, res) =>{
+app.get('/api/alumn/:alumnId', (req, res) =>{
+	 let alumnId = req.params.alumnId
 
+	 Alumn.findById(alumnId, (err, alumn) =>{
+	 	if(err) return res.status(500).send({message: `Error al realizar petición: ${err}` })
+	 	if(!alumn) return res.status(404).send({message:'El alumno no existe'})
+	 	
+	 	res.status(200).send( {alumn})	
+	 })
 })	
 
 app.post('/api/alumn', (req, res) =>{
@@ -37,12 +49,30 @@ app.post('/api/alumn', (req, res) =>{
 	})
 })
 
-app.put('/api/product/:productId', (req, res) =>{
+app.put('/api/alumn/:alumnId', (req, res) =>{
+	let alumnId = req.params.alumnId
+	let newdata = req.body
+
+	Alumn.findByIdAndUpdate(alumnId, newdata, (err, alumnUpdated) => {
+		if(err) res.status(500).send({message: `Error al actualizar el alumno: ${err}`})
+		
+		res.status(200).send({alumn: alumnUpdated})			
+	})
 
 })
 
-app.delete('/api/product/:productId', (req, res) =>{
+app.delete('/api/alumn/:alumnId', (req, res) =>{
+	let alumnId = req.params.alumnId
 
+	 Alumn.findById(alumnId, (err, alumn) =>{
+	 	if(err) res.status(500).send({message: `Error al borrar el alumno: ${err}` })
+	 	
+	 	alumn.remove((err) =>{
+	 		if(err) res.status(500).send({message: `Error al borrar el alumno: ${err}` })
+	 	
+	 		res.status(200).send( {message: 'Alumno eliminado correctamente'})	
+	 	})
+	 })
 })
 
 mongoose.connect('mongodb://localhost:27017/shop', (err, res) => {
