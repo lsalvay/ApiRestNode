@@ -51,7 +51,18 @@ function signIn (req, res) {
 
 }
 
+function getUsers (req, res) {
+	User.find({}, (err, users) => {
+		if(err) return res.status(500).send({message: `Error al realizar conexión: ${err}` })
+		if(!users) return res.status(404).send({message: 'Ruta no encontrada'})	
+		
+		res.status(200).send({users})
+	})	
+}
+
+
 module.exports = {
 	signUp,
-	signIn
+	signIn,
+	getUsers
 }

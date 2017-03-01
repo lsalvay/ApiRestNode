@@ -31,11 +31,11 @@ function savePatient (req, res) {
 
 	Patient.findOne({email : patient.email}, 'email', function(err, results) {
         if(err) {
-           res.status(500).send({message: 'Usuario ya existente'})
+           res.status(500).send({message: 'Paciente ya existente'})
         
         }else{
         		if(results){
-        			res.status(500).send({message: 'Usuario ya existente'})
+        			res.status(500).send({message: 'Paciente ya existente'})
         		}else{
         				patient.save((err, patientStored) =>{
 						if(err) res.status(500).send({message: 'Error al salvar en la base de datos' })

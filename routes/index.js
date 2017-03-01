@@ -23,8 +23,9 @@ api.post('/appointment', auth.isAuth, appointmentCtrl.saveAppointment)
 api.put('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.updateAppointment)
 api.delete('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.deleteAppointment)
 
-//Routes Auth
+//Routes User/Auth
 api.post('/signUp', authCtrl.signUp)
 api.post('/signIn', authCtrl.signIn)
+api.get('/users', auth.isAuth, authCtrl.getUsers)
 
 module.exports = api
