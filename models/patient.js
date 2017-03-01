@@ -4,10 +4,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PatientSchema = Schema({
+	dni: String,
 	name: String,
 	lastName: String,
 	email: String,
-	phone: String
+	phone: String,
+	obraSocial: String,
+	birthDate: Date,
 })
 
 
