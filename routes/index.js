@@ -11,7 +11,7 @@ const api = express.Router()
 
 //Routes Alumns
 api.get('/patients', auth.isAuth, patientCtrl.getPatients)
-api.get('/patient/:patientId' auth.isAuth,, patientCtrl.getPatient)	
+api.get('/patient/:patientId', auth.isAuth, patientCtrl.getPatient)	
 api.post('/patient', auth.isAuth, patientCtrl.savePatient)
 api.put('/patient/:patientId', auth.isAuth, patientCtrl.updatePatient)
 api.delete('/patient/:patientId', auth.isAuth, patientCtrl.deletePatient)
