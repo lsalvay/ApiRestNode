@@ -29,6 +29,8 @@ function saveAppointment (req, res) {
 	appointment.hour = req.body.hour
 	appointment.specialty = req.body.specialty
 	appointment.obraSocial = req.body.obraSocial
+	appointment.patient = req.body.patient
+	appointment.user = req.body.user
 
 	appointment.save((err) => {
 		if (err) res.status(500).send({ message: `Error al crear el turno: ${err}` })
@@ -44,11 +46,43 @@ function updateAppointment (req, res) {
 function deleteAppointment (req, res) {
 }
 
+function getAppointmentsByPatient (req, res)
+{ 	
+	let patientId = req.params.patientId
+	Appointment.find({patient: patientId})
+		.exec(function (err, appointments) {
+  			if (err) return res.status(500).send({message: `Error al realizar conexión: ${err}` })
+  			if(!appointments) return res.status(404).send({message: 'Ruta no encontrada'})	
+		
+			res.status(200).send({appointments})
+	
+			})
+		
+
+}
+
+function getAppointmentsByUser (req, res)
+{ 	
+	let userId = req.params.userId
+	Appointment.find({user: userId})
+		.exec(function (err, appointments) {
+  			if (err) return res.status(500).send({message: `Error al realizar conexión: ${err}` })
+  			if(!appointments) return res.status(404).send({message: 'Ruta no encontrada'})	
+		
+			res.status(200).send({appointments})
+	
+			})
+		
+
+}
+
 module.exports = {
 	getAppointment,
 	getAppointments,
 	saveAppointment,
 	updateAppointment,
-	deleteAppointment
+	deleteAppointment,
+	getAppointmentsByPatient,
+	getAppointmentsByUser
 
 }

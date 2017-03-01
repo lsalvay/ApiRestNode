@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const crypto = require('crypto')
 
-const ROLE_USER = 1, ROLE_MODERATOR = 2, ROLE_ADMIN = 3
+const ROLE_USER = 1, ROLE_EXTRAC = 2, ROLE_LAB = 3, ROLE_ADMIN = 4
 
 const UserSchema = new Schema({
 	email: { type: String, unique: true, lowercase: true },
@@ -14,7 +14,8 @@ const UserSchema = new Schema({
 	password: { type: String },
 	role: { type: Number, default: ROLE_USER },
 	signupDate: { type: Date, default: Date.now() },
-	lastLogin: Date
+	lastLogin: Date,
+	labName: { type: String, default: "" }
 })
 
 UserSchema.pre('save', function(next) {

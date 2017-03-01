@@ -18,7 +18,9 @@ api.delete('/patient/:patientId', auth.isAuth, patientCtrl.deletePatient)
 
 //Routes Appointment
 api.get('/appointments', auth.isAuth, appointmentCtrl.getAppointments)
-api.get('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.getAppointment)	
+api.get('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.getAppointment)
+api.get('/appointmentsByPatient/:patientId', appointmentCtrl.getAppointmentsByPatient)		
+api.get('/appointmentsByUser/:userId', appointmentCtrl.getAppointmentsByUser)		
 api.post('/appointment', auth.isAuth, appointmentCtrl.saveAppointment)
 api.put('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.updateAppointment)
 api.delete('/appointment/:appointmentId', auth.isAuth, appointmentCtrl.deleteAppointment)
