@@ -37,12 +37,12 @@ function signIn (req, res) {
 
 		// check if password matches
 	 	user.comparePassword(req.body.password, function(err, isMatch) {
-            if (err) res.status(500).send({ message: `Error en signIn: ${err}` })
+            if (err) res.status(500).send({ success: false, message: `Error en signIn: ${err}` })
            
             if (!isMatch){ 
-            	res.status(500).send({ message: 'Usuario o contraseña incorrecto' })
+            	res.status(500).send({success: false, message: 'Usuario o contraseña incorrecto' })
 			}else{
-        		return res.status(200).send({ token: service.createToken(user) })			
+        		return res.status(200).send({success: true, token: service.createToken(user) })			
         		}
        });
 	  
