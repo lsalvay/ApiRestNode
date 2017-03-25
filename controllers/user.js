@@ -29,7 +29,7 @@ function signIn (req, res) {
 	 email: req.body.email
 	 }, function(err, user) {
 
-	if (err) throw err;
+	if (err) res.status(500).send({success: false, message: 'Error al consultar de datos' });
 
 	if (!user) {
 	 res.json({ success: false, message: 'Usuario o contraseña incorrecto' })

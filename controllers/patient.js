@@ -24,6 +24,7 @@ function getPatients (req, res) {
 
 function savePatient (req, res) {
 	let patient = new Patient()
+	patient.dni = req.body.dni
 	patient.name = req.body.name
 	patient.lastName = req.body.lastName
 	patient.email = req.body.email

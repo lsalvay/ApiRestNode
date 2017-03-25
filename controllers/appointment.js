@@ -44,6 +44,17 @@ function updateAppointment (req, res) {
 }
 
 function deleteAppointment (req, res) {
+	let appointmentId = req.params.appointmentId
+
+	 Appointment.findById(appointmentId, (err, appointment) =>{
+	 	if(err) res.status(500).send({message: `Error al borrar el turno: ${err}` })
+	 	
+	 	appointment.remove((err) =>{
+	 		if(err) res.status(500).send({message: `Error al borrar el turno: ${err}` })
+	 	
+	 		res.status(200).send( {message: 'Turno eliminado correctamente'})	
+	 	})
+	 })
 }
 
 function getAppointmentsByPatient (req, res)
